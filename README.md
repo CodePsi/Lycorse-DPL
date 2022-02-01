@@ -5,7 +5,7 @@ The project is still in developing.
 # Getting Started
 ## Basic replacement
 To replace word in a document you can use the `DocumentManager` class:
-```
+```Java
 File file = new File("Document.odt");
 DocumentManager documentManager = DocumentManagerProvider.createDocumentManager(file);
 Document document = documentManager.openDocument(file);
@@ -19,7 +19,7 @@ document.saveDocumentAs(
 In order to use more functionality you can use the `LibreOfficeUnoManager`.
 
 ### Replacement
-```
+```Java
 File document = new File("Document.odt");
 LibreOfficeUnoManager libreOfficeUnoManager = new LibreOfficeUnoManager();
 libreOfficeUnoManager.openDocument(document);
