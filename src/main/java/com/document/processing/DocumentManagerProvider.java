@@ -9,9 +9,9 @@ public class DocumentManagerProvider {
         String extension = file.getName().split("[.]")[1];
         switch (extension) {
             case "odt":
-                return new OdtDocumentManager();
+                return new OdtDocumentManager(file);
             default:
-                return new OdtDocumentManager();
+                return new OdtDocumentManager(file);
         }
     }
 }

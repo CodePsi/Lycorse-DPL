@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.time.Duration;
 import java.time.Instant;
 
-class OdtDocumentPatternsAdjustTest {
+class OdtTextDocumentPatternsAdjustTest {
 
     @Test
     void adjustPatterns() throws IOException {

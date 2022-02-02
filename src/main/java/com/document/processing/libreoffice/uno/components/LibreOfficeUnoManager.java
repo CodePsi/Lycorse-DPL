@@ -237,6 +237,20 @@ public final class LibreOfficeUnoManager {
         return new Text(createTextViewCursor().getText());
     }
 
+    public void saveDocument(String filepath, DocumentConvertTypes convertTo) {
+        DocumentProperties documentProperties = new OdtDocumentProperties();
+        File file = new File(filepath);
+
+        if (!OdtFilePathHandler.isNormalizedFilepath(filepath)) {
+            filepath = OdtFilePathHandler.normalizeFilepath(filepath);
+        }
+        if (file.exists()) {
+            documentProperties.addProperty(OdtDocumentProperties.OVERWRITE, true);
+        }
+        documentProperties.addProperty(OdtDocumentProperties.FILTER_NAME, convertTo.getConvertType());
+        storeDocument(filepath, documentProperties);
+    }
+
     public void storeDocument(String filepath, DocumentProperties documentProperties) {
         try {
             XStorable xStorable = UnoRuntime.queryInterface(XStorable.class, component);

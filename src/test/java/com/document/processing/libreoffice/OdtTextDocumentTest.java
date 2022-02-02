@@ -1,6 +1,6 @@
 package com.document.processing.libreoffice;
 
-import com.document.processing.Document;
+import com.document.processing.TextDocument;
 import com.document.processing.DocumentManager;
 import com.document.processing.DocumentManagerProvider;
 import com.document.processing.DocumentProperties;
@@ -10,16 +10,16 @@ import org.junit.jupiter.api.Test;
 
 import java.io.File;
 
-class OdtDocumentTest {
+class OdtTextDocumentTest {
 
     @Test
     void saveDocumentAs() {
-        File file = ResourcesManager.getResourceFile("Document.odt");
+        File file = ResourcesManager.getResourceFile("TextDocument.odt");
         DocumentManager documentManager = DocumentManagerProvider.createDocumentManager(file);
-        Document document = documentManager.openDocument(file);
-        document.replace("{Search}", "Value");
-        document.saveDocumentAs(
-                new File("C:/Document.docx"),
+        TextDocument textDocument = documentManager.openDocument(file);
+        textDocument.replace("{Search}", "Value");
+        textDocument.saveDocumentAs(
+                new File("C:/TextDocument.docx"),
                 DocumentConvertTypes.MS_WORD_2007_XML);
     }
 
@@ -27,7 +27,7 @@ class OdtDocumentTest {
     void replace() {
         DocumentManager documentManager = new OdtDocumentManager();
         DocumentProperties documentProperties = new OdtDocumentProperties();
-        Document document = documentManager.openDocument(ResourcesManager.getResourceFile("TestTemplate.odt"));
-        document.replace("", "");
+        TextDocument textDocument = documentManager.openDocument(ResourcesManager.getResourceFile("TestTemplate.odt"));
+        textDocument.replace("", "");
     }
 }

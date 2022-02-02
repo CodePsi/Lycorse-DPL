@@ -1,10 +1,10 @@
-package com.document.xml.processing.odt;
+package com.textDocument.xml.processing.odt;
 
-import com.document.resources.manager.ResourcesManager;
-import com.document.xml.parser.Handler;
-import com.document.xml.processing.DocumentTemplate;
-import com.document.zip.ZipArchive;
-import com.document.zip.ZipFileContent;
+import com.textDocument.resources.manager.ResourcesManager;
+import com.textDocument.xml.parser.Handler;
+import com.textDocument.xml.processing.DocumentTemplate;
+import com.textDocument.zip.ZipArchive;
+import com.textDocument.zip.ZipFileContent;
 import jakarta.xml.bind.JAXBException;
 import org.xml.sax.SAXException;
 
@@ -33,8 +33,8 @@ public class OdtDocumentTemplateProcessor {
     public List<String> findAllTemplatePatterns() throws JAXBException, ParserConfigurationException, SAXException, IOException {
         StringReader stringReader = new StringReader("""
                 <?xml version="1.0 " encoding="UTF-8"?>
-                <office:document-content xmlns:office="urn:oasis:names:tc:opendocument:xmlns:office:1.0">
-                </office:document-content>
+                <office:textDocument-content xmlns:office="urn:oasis:names:tc:opendocument:xmlns:office:1.0">
+                </office:textDocument-content>
                 """);
 //        JAXBContext jaxbContext = JAXBContext.newInstance(DocumentContent.class);
 //        Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();

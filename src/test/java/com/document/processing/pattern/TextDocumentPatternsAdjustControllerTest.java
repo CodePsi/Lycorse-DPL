@@ -9,7 +9,7 @@ import java.time.Instant;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class DocumentPatternsAdjustControllerTest {
+class TextDocumentPatternsAdjustControllerTest {
 
     @Test
     void initializePatternAdjuster() throws IOException {
@@ -17,7 +17,7 @@ class DocumentPatternsAdjustControllerTest {
         DocumentPatternsAdjust documentPatternsAdjust = DocumentPatternsAdjustController.initializePatternAdjuster(
                 ResourcesManager.getResourceFile("TestDocument.odt"),
                 new Pattern("${", "}"));
-        documentPatternsAdjust.adjustPatterns()
+        documentPatternsAdjust.adjustPatterns();
         System.out.println(documentPatternsAdjust.getFoundPatterns());
 //        Instant end = Instant.now();
 //        System.out.println(Duration.between(start, end));
