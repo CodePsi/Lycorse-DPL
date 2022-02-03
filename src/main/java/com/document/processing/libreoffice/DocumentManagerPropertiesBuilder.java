@@ -1,6 +1,10 @@
 package com.document.processing.libreoffice;
 
+import com.document.processing.DocumentProperties;
 import com.document.processing.libreoffice.properties.OdtDocumentProperties;
+import com.document.processing.libreoffice.properties.PropertyValueWrapper;
+
+import java.util.List;
 
 public final class DocumentManagerPropertiesBuilder {
     private final OdtDocumentProperties odtDocumentProperties;
@@ -28,5 +32,9 @@ public final class DocumentManagerPropertiesBuilder {
     public DocumentManagerPropertiesBuilder asTemplate(boolean value) {
         odtDocumentProperties.addProperty(OdtDocumentProperties.AS_TEMPLATE, value);
         return this;
+    }
+
+    public DocumentProperties getPropertyHandler() {
+        return odtDocumentProperties;
     }
 }

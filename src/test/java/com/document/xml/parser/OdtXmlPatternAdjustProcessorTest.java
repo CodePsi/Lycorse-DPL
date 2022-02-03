@@ -1,6 +1,6 @@
-package com.textDocument.xml.parser;
+package com.document.xml.parser;
 
-import com.textDocument.processing.pattern.Pattern;
+import com.document.processing.pattern.Pattern;
 import org.junit.jupiter.api.Test;
 
 class OdtXmlPatternAdjustProcessorTest {

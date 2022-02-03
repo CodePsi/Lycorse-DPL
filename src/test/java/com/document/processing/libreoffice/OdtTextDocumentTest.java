@@ -15,6 +15,7 @@ class OdtTextDocumentTest {
     @Test
     void saveDocumentAs() {
         File file = ResourcesManager.getResourceFile("TextDocument.odt");
+        DocumentManagerProvider.createPropertiesBuilder().asTemplate(true).hidden(true);
         DocumentManager documentManager = DocumentManagerProvider.createDocumentManager(file);
         TextDocument textDocument = documentManager.openDocument(file);
         textDocument.replace("{Search}", "Value");

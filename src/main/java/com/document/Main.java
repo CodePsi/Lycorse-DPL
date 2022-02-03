@@ -10,8 +10,9 @@ import com.sun.star.uno.Exception;
 import java.io.File;
 
 public class Main {
-    public static void main(String[] args) throws BootstrapException, Exception {
+    public static void main(String[] args) {
         File resourceFile = ResourcesManager.getResourceFile("TestDocument.odt");
+        DocumentManagerProvider.createPropertiesBuilder().hidden(true).asTemplate(true);
         DocumentManager documentManager = DocumentManagerProvider.createDocumentManager(resourceFile);
         TextDocument textDocument = documentManager.openDocument(resourceFile);
         textDocument.replace("${Search}", "Value");

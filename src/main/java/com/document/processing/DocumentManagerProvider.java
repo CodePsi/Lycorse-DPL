@@ -6,18 +6,18 @@ import com.document.processing.libreoffice.OdtDocumentManager;
 import java.io.File;
 
 public class DocumentManagerProvider {
-    private DocumentManagerPropertiesBuilder documentManagerPropertiesBuilder;
+    private static DocumentManagerPropertiesBuilder documentManagerPropertiesBuilder;
 
-    public DocumentManagerProvider createPropertiesBuilder() {
+    public static DocumentManagerPropertiesBuilder createPropertiesBuilder() {
         documentManagerPropertiesBuilder = new DocumentManagerPropertiesBuilder();
-        return this;
+        return documentManagerPropertiesBuilder;
     }
 
     public static DocumentManager createDocumentManager(File file) {
         String extension = file.getName().split("[.]")[1];
-        return switch (extension) {
-            case "odt" -> new OdtDocumentManager(file);
-            default -> new OdtDocumentManager(file);
-        };
+        if (documentManagerPropertiesBuilder == null) {
+            return new OdtDocumentManager(file);
+        }
+        return new OdtDocumentManager(file, documentManagerPropertiesBuilder.getPropertyHandler());
     }
 }

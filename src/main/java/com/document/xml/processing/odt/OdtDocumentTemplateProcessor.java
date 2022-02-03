@@ -1,10 +1,10 @@
-package com.textDocument.xml.processing.odt;
+package com.document.xml.processing.odt;
 
-import com.textDocument.resources.manager.ResourcesManager;
-import com.textDocument.xml.parser.Handler;
-import com.textDocument.xml.processing.DocumentTemplate;
-import com.textDocument.zip.ZipArchive;
-import com.textDocument.zip.ZipFileContent;
+import com.document.xml.processing.DocumentTemplate;
+import com.document.resources.manager.ResourcesManager;
+import com.document.xml.parser.Handler;
+import com.document.zip.ZipArchive;
+import com.document.zip.ZipFileContent;
 import jakarta.xml.bind.JAXBException;
 import org.xml.sax.SAXException;
 
@@ -30,7 +30,7 @@ public class OdtDocumentTemplateProcessor {
         documentTemplate.setZipFileContent(zipFileContent);
     }
 
-    public List<String> findAllTemplatePatterns() throws JAXBException, ParserConfigurationException, SAXException, IOException {
+    public List<String> findAllTemplatePatterns() throws ParserConfigurationException, SAXException, IOException {
         StringReader stringReader = new StringReader("""
                 <?xml version="1.0 " encoding="UTF-8"?>
                 <office:textDocument-content xmlns:office="urn:oasis:names:tc:opendocument:xmlns:office:1.0">

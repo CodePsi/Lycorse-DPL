@@ -78,6 +78,10 @@ public final class LibreOfficeUnoManager {
             loadComponentLoader();
         }
 
+        if (documentProperties == null) {
+            documentProperties = new OdtDocumentProperties();
+        }
+
         component = componentLoader.loadComponentFromURL(filepath, targetFrame.getTargetFrameName(), frameSearchFlag.getFrameSearchFlag(), documentProperties.getPropertyValuesAsArray());
         textDocument = UnoRuntime.queryInterface(XTextDocument.class, component);
         return component;

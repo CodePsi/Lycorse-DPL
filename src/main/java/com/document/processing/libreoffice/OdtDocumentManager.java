@@ -11,12 +11,17 @@ import java.io.File;
 
 public class OdtDocumentManager implements DocumentManager {
     private File file;
+    private DocumentProperties documentProperties;
 
     public OdtDocumentManager() {
     }
 
     public OdtDocumentManager(File file) {
         this.file = file;
+    }
+    public OdtDocumentManager(File file, DocumentProperties documentProperties) {
+        this.file = file;
+        this.documentProperties = documentProperties;
     }
 
     @Override
@@ -27,10 +32,7 @@ public class OdtDocumentManager implements DocumentManager {
     @Override
     public TextDocument openDocument(File file) {
         try {
-            DocumentProperties documentProperties = new OdtDocumentProperties();
-            documentProperties.addProperty(OdtDocumentProperties.HIDDEN, true);
-            documentProperties.addProperty(OdtDocumentProperties.AS_TEMPLATE, true);
-            return new OdtTextDocument(file, documentProperties);
+            return new OdtTextDocument(file, this.documentProperties);
         } catch (BootstrapException | Exception e) {
             e.printStackTrace();
         }
