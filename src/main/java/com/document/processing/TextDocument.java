@@ -16,6 +16,6 @@ public interface TextDocument {
     void close(boolean askBeforeClose);
     void close();
 
-    void findFirst(String search);
+    String findFirst(String search);
     Text getAllText();
 }

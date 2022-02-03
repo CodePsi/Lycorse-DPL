@@ -4,9 +4,8 @@ import com.document.processing.TextDocument;
 import com.document.processing.DocumentProperties;
 import com.document.processing.libreoffice.properties.OdtDocumentProperties;
 import com.document.processing.libreoffice.uno.components.LibreOfficeUnoManager;
+import com.document.processing.libreoffice.uno.components.Text;
 import com.sun.star.comp.helper.BootstrapException;
-import com.sun.star.lang.XComponent;
-import com.sun.star.text.*;
 import com.sun.star.uno.Exception;
 
 import java.io.File;
@@ -67,10 +66,23 @@ public class OdtTextDocument implements TextDocument {
         libreOfficeUnoManager.replaceAll(search, replace);
     }
 
-
+    @Override
+    public void close(boolean askBeforeClose) {
+        libreOfficeUnoManager.closeDocument(askBeforeClose);
+    }
 
     @Override
     public void close() {
-        libreOfficeUnoManager.closeDocument();
+        close(false);
+    }
+
+    @Override
+    public String findFirst(String search) {
+        return libreOfficeUnoManager.findFirst(search);
+    }
+
+    @Override
+    public Text getAllText() {
+        return libreOfficeUnoManager.getAllDocumentText();
     }
 }
