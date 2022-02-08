@@ -1,15 +1,16 @@
 package com.document.processing.libreoffice;
 
+import com.document.processing.DocumentManager;
+import com.document.processing.DocumentManagerProvider;
 import com.document.processing.DocumentProperties;
 import com.document.processing.libreoffice.properties.OdtDocumentProperties;
-import com.document.processing.libreoffice.properties.PropertyValueWrapper;
-
-import java.util.List;
 
 public final class DocumentManagerPropertiesBuilder {
     private final OdtDocumentProperties odtDocumentProperties;
+    private final DocumentManagerProvider documentManagerProvider;
 
-    public DocumentManagerPropertiesBuilder() {
+    public DocumentManagerPropertiesBuilder(DocumentManagerProvider documentManagerProvider) {
+        this.documentManagerProvider = documentManagerProvider;
         this.odtDocumentProperties = new OdtDocumentProperties();
     }
 
@@ -37,4 +38,10 @@ public final class DocumentManagerPropertiesBuilder {
     public DocumentProperties getPropertyHandler() {
         return odtDocumentProperties;
     }
+
+    public DocumentManager build() {
+        return documentManagerProvider.build();
+    }
+
+
 }

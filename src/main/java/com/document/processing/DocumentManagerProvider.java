@@ -7,13 +7,18 @@ import java.io.File;
 
 public class DocumentManagerProvider {
     private static DocumentManagerPropertiesBuilder documentManagerPropertiesBuilder;
+    private File file;
 
-    public static DocumentManagerPropertiesBuilder createPropertiesBuilder() {
-        documentManagerPropertiesBuilder = new DocumentManagerPropertiesBuilder();
+    public DocumentManagerProvider createDocumentManager(File file) {
+        return new DocumentManagerProvider();
+    }
+
+    public DocumentManagerPropertiesBuilder createPropertiesBuilder() {
+        documentManagerPropertiesBuilder = new DocumentManagerPropertiesBuilder(this);
         return documentManagerPropertiesBuilder;
     }
 
-    public static DocumentManager createDocumentManager(File file) {
+    public DocumentManager build() {
         String extension = file.getName().split("[.]")[1];
         if (documentManagerPropertiesBuilder == null) {
             return new OdtDocumentManager(file);
