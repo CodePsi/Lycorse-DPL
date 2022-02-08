@@ -272,4 +272,8 @@ public final class LibreOfficeUnoManager {
         }
     }
 
+    public Printer initializePrinter() {
+        return new Printer(component);
+    }
+
 }

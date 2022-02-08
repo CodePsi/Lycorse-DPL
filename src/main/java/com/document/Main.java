@@ -12,8 +12,8 @@ import java.io.File;
 public class Main {
     public static void main(String[] args) {
         File resourceFile = ResourcesManager.getResourceFile("TestDocument.odt");
-        DocumentManagerProvider.createPropertiesBuilder().hidden(true).asTemplate(true);
-        DocumentManager documentManager = DocumentManagerProvider.createDocumentManager(resourceFile);
+        DocumentManagerProvider documentManagerProvider = new DocumentManagerProvider();
+        DocumentManager documentManager = documentManagerProvider.createPropertiesBuilder().hidden(true).asTemplate(true).build();
         TextDocument textDocument = documentManager.openDocument(resourceFile);
         textDocument.replace("${Search}", "Value");
         textDocument.saveDocument();

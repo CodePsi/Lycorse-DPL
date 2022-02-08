@@ -3,7 +3,6 @@ package com.document.processing.libreoffice;
 import com.document.processing.TextDocument;
 import com.document.processing.DocumentManager;
 import com.document.processing.DocumentProperties;
-import com.document.processing.libreoffice.properties.OdtDocumentProperties;
 import com.sun.star.comp.helper.BootstrapException;
 import com.sun.star.uno.Exception;
 
