@@ -32,7 +32,11 @@ public class OdtDocumentManager implements DocumentManager {
     @Override
     public TextDocument openDocument(File file) {
         try {
-            return new OdtTextDocument(file, this.documentProperties);
+            if (this.documentProperties != null) {
+                return new OdtTextDocument(file, this.documentProperties);
+            } else {
+                return new OdtTextDocument(file);
+            }
         } catch (BootstrapException | Exception e) {
             e.printStackTrace();
         }
