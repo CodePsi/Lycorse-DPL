@@ -13,6 +13,7 @@ public class OdtDocumentProperties implements DocumentProperties {
     public static final String FILTER_NAME = "FilterName";
     public static final String OVERWRITE = "Overwrite";
     public static final String AS_TEMPLATE = "AsTemplate";
+
     public static final PropertyValue[] EMPTY_PROPERTY = new PropertyValue[0];
 
 

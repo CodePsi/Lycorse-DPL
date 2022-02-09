@@ -4,6 +4,7 @@ import com.document.processing.DocumentProperties;
 import com.document.processing.libreoffice.DocumentConvertTypes;
 import com.document.processing.libreoffice.OdtFilePathHandler;
 import com.document.processing.libreoffice.properties.OdtDocumentProperties;
+import com.document.processing.libreoffice.uno.components.printer.Printer;
 import com.sun.star.comp.helper.Bootstrap;
 import com.sun.star.comp.helper.BootstrapException;
 import com.sun.star.container.XIndexAccess;

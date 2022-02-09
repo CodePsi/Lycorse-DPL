@@ -1,6 +1,7 @@
 package com.document.processing.libreoffice.properties;
 
 import com.sun.star.beans.Property;
+import com.sun.star.beans.PropertyValue;
 import com.sun.star.uno.Type;
 
 import java.util.ArrayList;
@@ -58,6 +59,10 @@ public class PropertyWrapper {
         }
 
         return propertyWrapperList;
+    }
+
+    public static PropertyValue[] getEmptyPropertyValueArray() {
+        return new PropertyValue[0];
     }
 
 }
