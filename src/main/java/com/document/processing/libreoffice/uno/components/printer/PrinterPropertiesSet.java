@@ -5,6 +5,10 @@ import com.document.processing.libreoffice.properties.OdtDocumentProperties;
 public class PrinterPropertiesSet {
     private OdtDocumentProperties odtDocumentProperties;
 
+    public PrinterPropertiesSet(OdtDocumentProperties odtDocumentProperties) {
+        this.odtDocumentProperties = odtDocumentProperties;
+    }
+
     public PrinterPropertiesSet setFileName(String fileName) {
         odtDocumentProperties.addProperty(PrintOptions.FILE_NAME.getValue(), fileName);
         return this;

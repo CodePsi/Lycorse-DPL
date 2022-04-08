@@ -5,6 +5,7 @@ import com.document.processing.DocumentProperties;
 import com.document.processing.libreoffice.properties.OdtDocumentProperties;
 import com.document.processing.libreoffice.uno.components.LibreOfficeUnoManager;
 import com.document.processing.libreoffice.uno.components.Text;
+import com.document.processing.libreoffice.uno.components.search.TextDocumentSearch;
 import com.sun.star.comp.helper.BootstrapException;
 import com.sun.star.uno.Exception;
 
@@ -12,19 +13,24 @@ import java.io.File;
 
 public class OdtTextDocument implements TextDocument {
     private LibreOfficeUnoManager libreOfficeUnoManager;
+    private TextDocumentSearch documentSearch;
 
     private String filepath;
 
     public OdtTextDocument(File file) throws BootstrapException, Exception {
-        this.libreOfficeUnoManager = new LibreOfficeUnoManager();
+        initialize(file);
         libreOfficeUnoManager.openDocument(file);
-        this.filepath = OdtFilePathHandler.normalizeFilepath(file);
     }
 
     public OdtTextDocument(File file, DocumentProperties documentProperties) throws BootstrapException, Exception {
-        this.libreOfficeUnoManager = new LibreOfficeUnoManager();
+        initialize(file);
         libreOfficeUnoManager.openDocument(file, documentProperties);
+    }
+
+    private void initialize(File file) {
+        this.libreOfficeUnoManager = new LibreOfficeUnoManager();
         this.filepath = OdtFilePathHandler.normalizeFilepath(file);
+        documentSearch = libreOfficeUnoManager.search();
     }
 
     @Override
@@ -78,11 +84,11 @@ public class OdtTextDocument implements TextDocument {
 
     @Override
     public String findFirst(String search) {
-        return libreOfficeUnoManager.findFirst(search);
+        return documentSearch.findFirst(search);
     }
 
     @Override
     public Text getAllText() {
-        return libreOfficeUnoManager.getAllDocumentText();
+        return documentSearch.getAllDocumentText();
     }
 }

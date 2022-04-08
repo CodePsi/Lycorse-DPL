@@ -6,7 +6,7 @@ import com.document.processing.libreoffice.OdtDocumentManager;
 import java.io.File;
 
 public class DocumentManagerProvider {
-    private static DocumentManagerPropertiesBuilder documentManagerPropertiesBuilder;
+    private DocumentManagerPropertiesBuilder documentManagerPropertiesBuilder;
     private File file;
 
     public DocumentManagerProvider createDocumentManager(File file) {
@@ -19,7 +19,6 @@ public class DocumentManagerProvider {
     }
 
     public DocumentManager build() {
-        String extension = file.getName().split("[.]")[1];
         if (documentManagerPropertiesBuilder == null) {
             return new OdtDocumentManager(file);
         }
