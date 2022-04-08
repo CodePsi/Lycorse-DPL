@@ -4,9 +4,6 @@ package com.document.processing.libreoffice.uno.components;
 import com.document.processing.libreoffice.properties.PropertySetValues;
 import com.document.processing.libreoffice.properties.PropertyValueWrapper;
 import com.document.processing.libreoffice.properties.text.TextWeight;
-import com.sun.star.beans.PropertyVetoException;
-import com.sun.star.beans.UnknownPropertyException;
-import com.sun.star.beans.XPropertySet;
 import com.sun.star.container.NoSuchElementException;
 import com.sun.star.container.XEnumeration;
 import com.sun.star.container.XEnumerationAccess;
@@ -18,7 +15,6 @@ import com.sun.star.text.XTextContent;
 import com.sun.star.text.XTextCursor;
 import com.sun.star.text.XTextRange;
 import com.sun.star.uno.UnoRuntime;
-import org.jfree.layouting.input.style.keys.font.FontWeight;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,6 +27,10 @@ public final class Text {
 
     public Text(XTextRange nativeTextRange) {
         this.nativeTextRange = nativeTextRange;
+    }
+
+    public static Text of(XTextContent xTextContent) {
+        return new Text(xTextContent.getAnchor());
     }
 
     public String getText() {
@@ -59,7 +59,8 @@ public final class Text {
     }
 
     public Cursor createCursor() {
-        return (cursor = new Cursor(createTextCursor()));
+        cursor = new Cursor(createTextCursor());
+        return cursor;
     }
 
     public Cursor getCursor() {
