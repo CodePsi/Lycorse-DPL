@@ -1,5 +1,6 @@
 package com.document.processing.libreoffice.uno.components;
 
+import com.sun.star.text.XParagraphCursor;
 import com.sun.star.text.XSentenceCursor;
 import com.sun.star.text.XTextCursor;
 import com.sun.star.text.XWordCursor;
@@ -117,6 +118,29 @@ public final class Cursor {
         sentenceCursor.gotoEndOfSentence(selectText);
         return this;
     }
+
+    public Cursor goLeftBy(short byNumberOfSymbols, boolean selectText) {
+        textCursor.goLeft(byNumberOfSymbols, selectText);
+        return this;
+    }
+
+    public Cursor goRightBy(short byNumberOfSymbols, boolean selectText) {
+        textCursor.goRight(byNumberOfSymbols, selectText);
+        return this;
+    }
+
+    public Cursor gotoNextParagraph(boolean selectText) {
+        XParagraphCursor paragraphCursor = UnoRuntime.queryInterface(XParagraphCursor.class, textCursor);
+        paragraphCursor.gotoNextParagraph(selectText);
+
+        return this;
+    }
+
+    public Cursor gotoNextParagraph() {
+        return gotoNextParagraph(true);
+    }
+
+
 
     public XTextCursor getTextCursor() {
         return textCursor;
