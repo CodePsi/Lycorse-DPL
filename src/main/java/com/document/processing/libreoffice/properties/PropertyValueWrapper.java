@@ -1,12 +1,10 @@
 package com.document.processing.libreoffice.properties;
 
-import com.document.processing.libreoffice.properties.text.TextWeight;
 import com.sun.star.beans.PropertyValue;
 import com.sun.star.beans.PropertyVetoException;
 import com.sun.star.beans.UnknownPropertyException;
 import com.sun.star.beans.XPropertySet;
 import com.sun.star.lang.WrappedTargetException;
-import com.sun.star.text.XTextCursor;
 import com.sun.star.uno.UnoRuntime;
 
 public class PropertyValueWrapper {
@@ -42,6 +40,17 @@ public class PropertyValueWrapper {
         try {
             XPropertySet propertySet = UnoRuntime.queryInterface(XPropertySet.class, object);
             propertySet.setPropertyValue(propertySetValues.getValue(), value);
+        } catch (UnknownPropertyException | PropertyVetoException | WrappedTargetException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void setPropertyValueArrayForObject(Object object, OdtDocumentProperties odtDocumentProperties) {
+        try {
+            XPropertySet propertySet = UnoRuntime.queryInterface(XPropertySet.class, object);
+            for (PropertyValueWrapper propertyValueWrapper : odtDocumentProperties.getPropertyValues()) {
+                propertySet.setPropertyValue(propertyValueWrapper.getName(), propertyValueWrapper.getValue());
+            }
         } catch (UnknownPropertyException | PropertyVetoException | WrappedTargetException e) {
             e.printStackTrace();
         }
