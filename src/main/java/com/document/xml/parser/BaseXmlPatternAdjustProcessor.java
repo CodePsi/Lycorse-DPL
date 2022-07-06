@@ -15,7 +15,7 @@ public abstract class BaseXmlPatternAdjustProcessor implements XmlPatternsAdjust
     protected int endOfPattern;
     protected int startOfPatternOffset;
 
-    public BaseXmlPatternAdjustProcessor(String xmlContent, Pattern pattern) {
+    protected BaseXmlPatternAdjustProcessor(String xmlContent, Pattern pattern) {
         this.xmlContent = xmlContent;
         this.pattern = pattern;
         foundPatterns = new ArrayList<>();

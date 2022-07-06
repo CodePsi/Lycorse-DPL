@@ -1,19 +1,20 @@
-package com.document.processing.libreoffice.uno.components;
+package com.document.processing.libreoffice.uno.components.cursor;
 
-import com.sun.star.text.XParagraphCursor;
-import com.sun.star.text.XSentenceCursor;
-import com.sun.star.text.XTextCursor;
-import com.sun.star.text.XWordCursor;
+import com.document.processing.libreoffice.uno.components.Text;
+import com.sun.star.text.*;
 import com.sun.star.uno.UnoRuntime;
 
 import java.util.Objects;
 
 public final class Cursor {
     private final XTextCursor textCursor;
-    private XTextCursor latelyUsedCursor; // May be removed
 
     public Cursor(XTextCursor textCursor) {
         this.textCursor = textCursor;
+    }
+
+    public static Cursor of(XTextRange textRange) {
+        return new Cursor(textRange.getText().createTextCursorByRange(textRange));
     }
 
     public Cursor gotoNextText(Text text) {
@@ -32,7 +33,6 @@ public final class Cursor {
     public Cursor gotoNextWord(boolean selectText) {
         XWordCursor wordCursor = UnoRuntime.queryInterface(XWordCursor.class, textCursor);
         wordCursor.gotoNextWord(selectText);
-        latelyUsedCursor = wordCursor;
         return this;
     }
 
@@ -43,7 +43,6 @@ public final class Cursor {
     public Cursor gotoPreviousWord(boolean selectText) {
         XWordCursor wordCursor = UnoRuntime.queryInterface(XWordCursor.class, textCursor);
         wordCursor.gotoPreviousWord(selectText);
-        latelyUsedCursor = wordCursor;
         return this;
     }
 
@@ -54,7 +53,6 @@ public final class Cursor {
     public Cursor gotoStartOfTheWord(boolean selectText) {
         XWordCursor wordCursor = UnoRuntime.queryInterface(XWordCursor.class, textCursor);
         wordCursor.gotoStartOfWord(selectText);
-        latelyUsedCursor = wordCursor;
         return this;
     }
 
@@ -65,7 +63,6 @@ public final class Cursor {
     public Cursor gotoEndOfTheWord(boolean selectText) {
         XWordCursor wordCursor = UnoRuntime.queryInterface(XWordCursor.class, textCursor);
         wordCursor.gotoEndOfWord(selectText);
-        latelyUsedCursor = wordCursor;
         return this;
     }
 
@@ -146,6 +143,15 @@ public final class Cursor {
         return textCursor;
     }
 
+    public Cursor gotoEnd(boolean selectText) {
+        textCursor.gotoEnd(selectText);
+        return this;
+    }
+
+    public Cursor gotoEnd() {
+        return gotoEnd(false);
+    }
+
     @Override
     public boolean equals(Object obj) {
         if (obj == this) return true;
@@ -163,9 +169,5 @@ public final class Cursor {
     public String toString() {
         return "Cursor[" +
                 "textCursor=" + textCursor + ']';
-    }
-
-    public XTextCursor getLatelyUsedCursor() {
-        return latelyUsedCursor;
     }
 }

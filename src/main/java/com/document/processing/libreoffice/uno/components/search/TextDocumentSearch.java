@@ -44,7 +44,7 @@ public class TextDocumentSearch {
         textViewCursor.gotoStart(false);
     }
 
-    private Optional<Text> findFirstInDocument(String search) {
+    public Optional<Text> findFirstInDocument(String search) {
         searchDescriptor.setSearchString(search);
         XInterface xInterface = (XInterface) searchable.findFirst(searchDescriptor);
         Optional<Text> optionalText = Optional.empty();

@@ -5,7 +5,7 @@ import com.document.processing.libreoffice.uno.components.Text;
 
 import java.io.File;
 
-public interface TextDocument {
+public interface AdvancedTextDocument {
     void saveDocument(File file);
     void saveDocument(String filepath);
     void saveDocument();

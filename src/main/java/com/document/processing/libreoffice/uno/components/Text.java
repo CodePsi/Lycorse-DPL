@@ -4,16 +4,15 @@ package com.document.processing.libreoffice.uno.components;
 import com.document.processing.libreoffice.properties.PropertySetValues;
 import com.document.processing.libreoffice.properties.PropertyValueWrapper;
 import com.document.processing.libreoffice.properties.text.TextWeight;
+import com.document.processing.libreoffice.uno.components.cursor.Cursor;
+import com.document.processing.libreoffice.uno.components.cursor.TextRange;
 import com.sun.star.container.NoSuchElementException;
 import com.sun.star.container.XEnumeration;
 import com.sun.star.container.XEnumerationAccess;
 import com.sun.star.lang.WrappedTargetException;
 import com.sun.star.lang.XServiceInfo;
 import com.sun.star.style.ParagraphAdjust;
-import com.sun.star.text.XText;
-import com.sun.star.text.XTextContent;
-import com.sun.star.text.XTextCursor;
-import com.sun.star.text.XTextRange;
+import com.sun.star.text.*;
 import com.sun.star.uno.UnoRuntime;
 
 import java.util.ArrayList;
@@ -29,8 +28,13 @@ public final class Text {
         this.nativeTextRange = nativeTextRange;
     }
 
-    public static Text of(XTextContent xTextContent) {
-        return new Text(xTextContent.getAnchor());
+    public static Text of(XTextContent textContent) {
+        return new Text(textContent.getAnchor());
+    }
+
+    public static Text of(XText text) {
+        XTextRange textRange = UnoRuntime.queryInterface(XTextRange.class, text);
+        return new Text(textRange);
     }
 
     public String getText() {
@@ -43,15 +47,15 @@ public final class Text {
     }
 
     public void setText(String newText) {
-        createTextCursor().setString(newText);
+        getCurrentTextRange().setString(newText);
     }
 
     public void addStringBeforeText(String text) {
-        nativeTextRange.getStart().setString(text);
+        getCurrentTextRange().getStart().setString(text);
     }
 
     public void addStringAfterText(String text) {
-        nativeTextRange.getEnd().setString(text);
+        getCurrentTextRange().getEnd().setString(text);
     }
 
     private XTextCursor createTextCursor() {
@@ -59,7 +63,7 @@ public final class Text {
     }
 
     public Cursor createCursor() {
-        cursor = new Cursor(createTextCursor());
+        cursor = Cursor.of(nativeTextRange);
         return cursor;
     }
 
@@ -127,6 +131,29 @@ public final class Text {
         PropertyValueWrapper.setPropertyValueForObject(getCurrentCursorOrCreateNew(),
                 PropertySetValues.PARAGRAPH_ADJUSTMENT,
                 paragraphAdjustment.getValue());
+    }
+
+    public void addNewLine(String newLine) {
+//        createCursor().gotoEndOfTheSentence(false);
+
+        nativeTextRange.getText().insertControlCharacter(getCurrentTextRange(), ControlCharacter.PARAGRAPH_BREAK, false);
+        addStringAfterText(newLine);
+    }
+
+    public TextRange getTextRange() {
+        return new TextRange(nativeTextRange);
+    }
+
+    private XTextRange getCurrentTextRange() {
+        if (cursor != null) {
+            return cursor.getTextCursor().getStart();
+        }
+
+        return nativeTextRange;
+    }
+
+    public void moveCursorTo(Text text) {
+
     }
 
     @Override

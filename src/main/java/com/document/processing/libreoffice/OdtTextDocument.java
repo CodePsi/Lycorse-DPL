@@ -1,6 +1,6 @@
 package com.document.processing.libreoffice;
 
-import com.document.processing.TextDocument;
+import com.document.processing.AdvancedTextDocument;
 import com.document.processing.DocumentProperties;
 import com.document.processing.libreoffice.properties.OdtDocumentProperties;
 import com.document.processing.libreoffice.uno.components.LibreOfficeUnoManager;
@@ -11,7 +11,7 @@ import com.sun.star.uno.Exception;
 
 import java.io.File;
 
-public class OdtTextDocument implements TextDocument {
+public class OdtTextDocument implements AdvancedTextDocument {
     private LibreOfficeUnoManager libreOfficeUnoManager;
     private TextDocumentSearch documentSearch;
 
@@ -30,7 +30,6 @@ public class OdtTextDocument implements TextDocument {
     private void initialize(File file) {
         this.libreOfficeUnoManager = new LibreOfficeUnoManager();
         this.filepath = OdtFilePathHandler.normalizeFilepath(file);
-        documentSearch = libreOfficeUnoManager.search();
     }
 
     @Override
@@ -49,7 +48,7 @@ public class OdtTextDocument implements TextDocument {
     }
 
     private void storeDocument(String filepath, DocumentProperties documentProperties) {
-        libreOfficeUnoManager.storeDocument(filepath, documentProperties);
+//        libreOfficeUnoManager.storeDocument(filepath, documentProperties);
     }
 
     @Override
@@ -59,7 +58,7 @@ public class OdtTextDocument implements TextDocument {
 
     @Override
     public void saveDocumentAs(String filepath, DocumentConvertTypes convertTo) {
-        libreOfficeUnoManager.saveDocument(filepath, convertTo);
+//        libreOfficeUnoManager.saveDocument(filepath, convertTo);
     }
 
     @Override
@@ -74,7 +73,7 @@ public class OdtTextDocument implements TextDocument {
 
     @Override
     public void close(boolean askBeforeClose) {
-        libreOfficeUnoManager.closeDocument(askBeforeClose);
+
     }
 
     @Override

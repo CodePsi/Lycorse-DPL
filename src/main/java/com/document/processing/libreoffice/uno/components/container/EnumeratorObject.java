@@ -2,6 +2,7 @@ package com.document.processing.libreoffice.uno.components.container;
 
 import com.document.processing.libreoffice.uno.components.ComponentService;
 import com.document.processing.libreoffice.uno.components.UnoObject;
+import com.document.processing.libreoffice.uno.components.container.packager.TablePackager;
 import com.document.processing.libreoffice.uno.components.container.packager.TextPackager;
 import com.sun.star.lang.XServiceInfo;
 import com.sun.star.text.XTextContent;
@@ -9,11 +10,11 @@ import com.sun.star.uno.UnoRuntime;
 
 import java.util.function.Consumer;
 
-public class ContainerEnumeratorObject {
+public class EnumeratorObject {
     private Object element;
     private XServiceInfo serviceInfo;
 
-    public ContainerEnumeratorObject(Object element) {
+    public EnumeratorObject(Object element) {
         initialize(element);
     }
 
@@ -36,4 +37,13 @@ public class ContainerEnumeratorObject {
             consumer.accept(new TextPackager(element));
         }
     }
+
+    public void ifTable(Consumer<TablePackager> consumer) {
+        UnoObject unoObject = new UnoObject(element);
+        if (isService(ComponentService.TEXT_TABLE)) {
+            consumer.accept(new TablePackager(element));
+        }
+    }
+
+
 }

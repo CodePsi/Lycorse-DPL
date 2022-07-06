@@ -1,13 +1,14 @@
 package com.document.resources.manager;
 
-import com.document.Main;
-
 import java.io.File;
 import java.io.InputStream;
 import java.net.URL;
 import java.util.Objects;
 
 public class ResourcesManager {
+
+    private ResourcesManager() {}
+
     public static String getResourceFilepath(String filepath) {
         URL url = getResourceURL(filepath);
         String resourceFilepath = url.getFile();
@@ -19,7 +20,7 @@ public class ResourcesManager {
     }
 
     public static URL getResourceURL(String filepath) {
-        return Objects.requireNonNull(Main.class.getClassLoader().getResource(filepath));
+        return Objects.requireNonNull(ResourcesManager.class.getClassLoader().getResource(filepath));
     }
 
     public static File getResourceFile(String filepath) {
@@ -27,6 +28,6 @@ public class ResourcesManager {
     }
 
     public static InputStream getResourceInputStream(String filepath) {
-        return Main.class.getClassLoader().getResourceAsStream(filepath);
+        return ResourcesManager.class.getClassLoader().getResourceAsStream(filepath);
     }
 }

@@ -1,19 +1,14 @@
 package com.document.processing.libreoffice;
 
-import com.document.processing.DocumentManager;
-import com.document.processing.DocumentManagerProvider;
 import com.document.processing.DocumentProperties;
 import com.document.processing.libreoffice.properties.OdtDocumentProperties;
 
 public final class DocumentManagerPropertiesBuilder {
-    private final OdtDocumentProperties odtDocumentProperties;
-    private final DocumentManagerProvider documentManagerProvider;
+    private OdtDocumentProperties odtDocumentProperties;
 
-    public DocumentManagerPropertiesBuilder(DocumentManagerProvider documentManagerProvider) {
-        this.documentManagerProvider = documentManagerProvider;
-        this.odtDocumentProperties = new OdtDocumentProperties();
+    public static DocumentManagerPropertiesBuilder instance() {
+        return new DocumentManagerPropertiesBuilder();
     }
-
     /**
      * This option handles document without opening a GUI.
      *
@@ -39,9 +34,7 @@ public final class DocumentManagerPropertiesBuilder {
         return odtDocumentProperties;
     }
 
-    public DocumentManager build() {
-        return documentManagerProvider.build();
+    public DocumentProperties build() {
+        return odtDocumentProperties;
     }
-
-
 }

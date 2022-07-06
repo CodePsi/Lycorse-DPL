@@ -15,7 +15,7 @@ public class ContainerEnumerator {
         return enumeration.hasMoreElements();
     }
 
-    public ContainerEnumeratorObject nextElement() throws WrappedTargetException, NoSuchElementException {
-        return new ContainerEnumeratorObject(enumeration.nextElement());
+    public EnumeratorObject nextElement() throws WrappedTargetException, NoSuchElementException {
+        return new EnumeratorObject(enumeration.nextElement());
     }
 }

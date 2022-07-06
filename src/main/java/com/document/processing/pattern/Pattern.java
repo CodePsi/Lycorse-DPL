@@ -6,6 +6,7 @@ import java.util.Objects;
 public class Pattern implements Serializable {
     private String startPattern;
     private String endPattern;
+    public static final Pattern DEFAULT_PATTERN = new Pattern("{", "}");
 
     public Pattern(String startPattern, String endPattern) {
         this.startPattern = startPattern;
@@ -31,6 +32,10 @@ public class Pattern implements Serializable {
 
     public void setEndPattern(String endPattern) {
         this.endPattern = endPattern;
+    }
+
+    public String getPatternString(String string) {
+        return startPattern + string + endPattern;
     }
 
     @Override

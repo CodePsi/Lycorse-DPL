@@ -1,6 +1,6 @@
 package com.document.processing.libreoffice;
 
-import com.document.processing.TextDocument;
+import com.document.processing.AdvancedTextDocument;
 import com.document.processing.DocumentManager;
 import com.document.processing.DocumentProperties;
 import com.sun.star.comp.helper.BootstrapException;
@@ -24,12 +24,12 @@ public class OdtDocumentManager implements DocumentManager {
     }
 
     @Override
-    public TextDocument openDocument() {
+    public AdvancedTextDocument openDocument() {
         return openDocument(this.file);
     }
 
     @Override
-    public TextDocument openDocument(File file) {
+    public AdvancedTextDocument openDocument(File file) {
         try {
             if (this.documentProperties != null) {
                 return new OdtTextDocument(file, this.documentProperties);
