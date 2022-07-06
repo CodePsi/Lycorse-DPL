@@ -34,6 +34,9 @@ public class OdtDocumentProperties implements DocumentProperties {
     }
 
     public PropertyValue[] getPropertyValuesAsArray() {
+        if (propertyValues.isEmpty()) {
+            return EMPTY_PROPERTY;
+        }
         return propertyValues.stream().map(PropertyValueWrapper::getPropertyValue).toList().toArray(new PropertyValue[0]);
     }
 

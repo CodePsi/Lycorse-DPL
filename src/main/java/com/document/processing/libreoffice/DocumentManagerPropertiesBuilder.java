@@ -4,7 +4,11 @@ import com.document.processing.DocumentProperties;
 import com.document.processing.libreoffice.properties.OdtDocumentProperties;
 
 public final class DocumentManagerPropertiesBuilder {
-    private OdtDocumentProperties odtDocumentProperties;
+    private final DocumentProperties documentProperties;
+
+    private DocumentManagerPropertiesBuilder() {
+        documentProperties = new OdtDocumentProperties();
+    }
 
     public static DocumentManagerPropertiesBuilder instance() {
         return new DocumentManagerPropertiesBuilder();
@@ -15,7 +19,7 @@ public final class DocumentManagerPropertiesBuilder {
      * @param value value for property
      */
     public DocumentManagerPropertiesBuilder hidden(boolean value) {
-        odtDocumentProperties.addProperty(OdtDocumentProperties.HIDDEN, value);
+        documentProperties.addProperty(OdtDocumentProperties.HIDDEN, value);
         return this;
     }
 
@@ -26,15 +30,15 @@ public final class DocumentManagerPropertiesBuilder {
      * @param value value for property
      */
     public DocumentManagerPropertiesBuilder asTemplate(boolean value) {
-        odtDocumentProperties.addProperty(OdtDocumentProperties.AS_TEMPLATE, value);
+        documentProperties.addProperty(OdtDocumentProperties.AS_TEMPLATE, value);
         return this;
     }
 
     public DocumentProperties getPropertyHandler() {
-        return odtDocumentProperties;
+        return documentProperties;
     }
 
     public DocumentProperties build() {
-        return odtDocumentProperties;
+        return documentProperties;
     }
 }
